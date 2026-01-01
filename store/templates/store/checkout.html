@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+<title>Checkout</title>
+ {% load static %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+
+  <style>
+    
+  </style>
+
+  <body>
+   
+      <header>
+<h2>Checkout</h2>
+   </header>
+  
+  
+  <form style="border: 2px solid ;width: 500px;height: 400px;margin-top: 50px;margin-left: 400px;text-align: center;background-color: rgb(20, 255, 243);border-radius: 4px;" method="post">
+    
+    <div style="width: 498px;height: 60px;border: 1px solid;color: white;background-color: rgb(63, 20, 220);">
+<h2>Checkout</h2>
+    </div>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Total: ₹{{ total }}</p>
+    <button style="background-color: red;color: white;border-radius: 4px;border: none;" type="submit">Place order</button>
+  </form>
+</body>
+</html>

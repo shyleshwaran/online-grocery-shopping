@@ -1,0 +1,45 @@
+<div style="text-align: center" class="container">
+        <h2 style="background-color: #28a745;color: white;padding: 15px 20px;display: flex;justify-content: space-between;align-items: center;"
+            class="mb-4">Orders</h2>
+            
+<h2>Your Order</h2>
+
+
+<p><strong>Date:</strong> {{ order.created_at }}</p>
+<p><strong>Status:</strong> {{ order.get_status_display }}</p>
+
+ 
+<hr>
+
+<h2>Ordered Items</h2>
+<div style="margin-left: 550px;">
+<table border="1" cellspacing="0" cellpadding="8">
+    <thead >
+        <tr style="text-align: center;">
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price }}</td>
+            <td>₹{{ item.get_cost }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<hr>
+
+<h2>Delivery Details</h2>
+<p><strong>Name:</strong> {{ order.full_name }}</p>
+<p><strong>Address:</strong> {{ order.address }}</p>
+<p><strong>City:</strong> {{ order.city }}</p>
+<p><strong>Pincode:</strong> {{ order.pincode }}</p>
+
+

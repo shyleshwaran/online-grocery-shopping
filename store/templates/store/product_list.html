@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}All Products{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">🛒 Grocery Products</h2>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% else %}
+                <img src="{% static 'images/no-image.png' %}" class="card-img-top" alt="No image">
+                {% endif %}
+
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-success fw-bold">₹{{ product.price }}</p>
+
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-sm">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No products available yet</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

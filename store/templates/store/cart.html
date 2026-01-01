@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Cart</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+  
+</head>
+
+<body>
+  <header>
+<h1>My Cart</h1>
+
+  </header>
+
+  
+<div>
+  <div style="margin-left: 500px;margin-top: 200px;" class="nav-links">
+    <h2>🛒 Your Shopping Cart</h2>
+    <a style="background-color: hotpink;color: white;text-decoration: none;padding: 9px 12px; border-radius: 4px;cursor: pointer;margin-left: 60px;" href="{% url 'home' %}" class="btn blue"> Continue Shopping</a>
+  </div>
+
+  <ul style="margin-left: 530px;" class="cart-list">
+    {% for item in items %}
+      <li class="cart-item">
+        <div style="margin-left: 100px;" class="item-info">
+          <h4>{{ item.product.name }}</h4>
+          <p>₹{{ item.product.price }} × {{ item.quantity }}</p>
+          <p class="total">Total: ₹{{ item.total_price }}</p>
+        </div>
+
+        <form action="{% url 'remove_from_cart' item.id %}" method="post">
+          {% csrf_token %}
+          <button style="padding: 8px 12px; border-radius: 4px;cursor: pointer;margin-left: 100px;" type="submit" class="btn red">Remove</button>
+        </form>
+      </li>
+    {% empty %}
+      <li style="margin-left: 50px;" class="empty">Your cart is empty.</li>
+    {% endfor %}
+  </ul>
+
+  {% if items %}
+    <h3 style="margin-left: 600px;" class="grand-total">Grand Total: ₹{{ total }}</h3>
+    <div  class="actions">
+      <a style="margin-left: 600px;background-color: royalblue;color: white;text-decoration: none;margin-bottom: 100px;padding: 9px 12px; border-radius: 4px; cursor: pointer;" href="{% url 'checkout' %}" class="btn green">Proceed to Checkout </a>
+    </div>
+  {% endif %}
+</div>
+</body>
+</html>

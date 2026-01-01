@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <title>Grocery store - Home</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Grocery Store</h1>
+    <nav>
+      {% if user.is_authenticated %}
+        Hello {{ user.username }} | <a href="{% url 'logout' %}">Logout</a> | <a href="{% url 'order_list' %}">My Orders</a> |
+
+        <a href="{% url 'cart' %}">Cart</a> | 
+      {% else %}
+        <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign up</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <aside>
+    <h3>Categories</h3>
+    <ul>
+      {% for cat in categories %}
+        <li><a href="{% url 'category_detail' cat.slug %}">{{ cat.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <main>
+    <h2>Products</h2>
+    <ul>
+      {% for p in products %}
+        <li>
+          <a href="{% url 'product_detail' p.slug %}">{{ p.name }}</a>  ₹{{ p.price }}
+          <form action="{% url 'add_to_cart' p.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button style="background-color:blue" type="submit">Add to cart</button>
+          </form>
+        </li>
+      {% empty %}
+        <li>No products yet.</li>
+      {% endfor %}
+    </ul>
+  </main>
+</body>
+</html>

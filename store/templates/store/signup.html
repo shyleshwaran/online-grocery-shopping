@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    {% load static %}
+  </head>
+  <style>
+    #h2b{
+      background-color: #28a745;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    }
+  </style>
+  <body>
+  <h2 id="h2b">Sign Up</h2>
+
+  <form style="border: 2px solid ;width: 600px;height: 450px;margin-top: 50px;margin-left: 400px;text-align: center;background-color: rgb(231, 255, 20);border-radius: 4px;" method="post">{% csrf_token %}
+    <div style="width: 598px;height: 60px;border: 1px solid;color: white;background-color: rgb(220, 20, 177);">
+      <h2>Login</h2>
+    </div>
+ <p style="padding-top: 20px;"><label>Username: <input name="username"></label></p>
+  <p style="padding-top: 20px;"><label>Email Id: <input name="E-mail"></label></p>
+    <p style="padding-top: 20px;"><label>Password: <input name="password" type="password"></label></p>
+    <p style="padding-top: 20px;"><label>Password Confirmation: <input name="password Confirmation" type="password Confirmation"></label></p>
+    <button style="margin-top: 20px;background-color: chocolate;color: white;height: 30px;border: none;border-radius: 4px;" type="submit">Create account</button>
+    <p style="padding-top: 20px;color: blue;">Already have an account? <a style="background-color: #28a745;color: white;border: none;padding: 8px 12px;border-radius: 4px;cursor: pointer;text-decoration: none;" href="{% url 'login' %}">Login</a></p>
+  </form>
+  
+</body>
+</html>

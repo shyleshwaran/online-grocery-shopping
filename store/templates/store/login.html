@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login</title>
+    {% load static %} 
+  </head>
+  <style>
+    #h2a{
+      background-color: #28a745;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    }
+  </style>
+  <body>
+  <h2 id="h2a">Login</h2>
+  <form style="border: 2px solid ;width: 400px;height: 280px;margin-top: 50px;margin-left: 450px;text-align: center;background-color: blue;" method="post">{% csrf_token %}
+    <div style="width: 398px;height: 60px;border: 1px solid;color: white;background-color: crimson;">
+      <h2>Login</h2>
+    </div>
+    <div style="margin-top: 20px;">
+      <p style="padding-top: 10px;color: white;"><label>Username: <input name="username"></label></p>
+    <p style="padding-top: 10px;color: white;"><label>Password: <input name="password" type="password"></label></p>
+    <button style="background-color: gold;color: black;border: none;padding: 8px 15px;border-radius: 4px;cursor: pointer;text-decoration: none;padding-top: 12px;margin-top: 20px;text-align: center;" type="submit">Login</button> <a style="background-color: palevioletred; color: white; border: none;  padding: 8px 12px;  border-radius: 4px;  cursor: pointer;  text-decoration: none;margin-left: 15px;" href="{% url 'signup' %}">
+      Create an account
+    </a> 
+    </div>
+    
+  </form>
+  
+</body>
+</html>
