@@ -28,4 +28,5 @@ class OrderItemInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'full_name', 'created_at', 'status', 'total']
     inlines = [OrderItemInline]
+
     readonly_fields = ('created_at',)
