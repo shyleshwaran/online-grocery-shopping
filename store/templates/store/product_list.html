@@ -1,35 +1,35 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ product.name }}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
 
-<style>
-  
-</style>
+{% block title %}All Products{% endblock %}
 
-<body>
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">🛒 Grocery Products</h2>
 
-<header class="product-header">
-    <h1>{{ product.name }}</h1>
-    <a style = "font-size: 30px" href="{% url 'home' %}" class="back-link">Back to Home</a>
-</header>
+    <div>
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% else %}
+                <img src="{% static 'images/no-image.png' %}" class="card-img-top" alt="No image">
+                {% endif %}
 
-<main style="border:1px solid black;text-align:center;border-radius:40px;height:400px;margin:auto;margin-top:100px;margin-right:600px;width:300px;border:2px" class="product-container">
-    {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
-    {% endif %}
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-success fw-bold">₹{{ product.price }}</p>
 
-    <p class="price"><strong>Price:</strong> ₹{{ product.price }}</p>
-    <p class="description"><strong>Description:</strong> {{ product.description }}</p>
-
-    <form action="{% url 'add_to_cart' product.id %}" method="post">
-        {% csrf_token %}
-        <button style="background-color:blue;color:white;border:none;height:25px" type="submit" class="add-btn">Add to Cart</button>
-    </form>
-</main>
-
-</body>
-</html>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-sm">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No products available yet</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
