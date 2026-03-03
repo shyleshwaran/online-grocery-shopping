@@ -7,34 +7,41 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-  <header>
-    <h1>Grocery Store</h1>
-    <nav>
+  <header style="background-color: #28a745;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;height:50px;font-size:25px" class = "header">
+    <h1 style = "font-size:30px">Grocery Store</h1>
+    <nav style="padding:20px">
       {% if user.is_authenticated %}
-        Hello {{ user.username }} | <a href="{% url 'logout' %}">Logout</a> | <a href="{% url 'order_list' %}">My Orders</a> |
+        Hello {{ user.username }} | <a style= "font-size = 30px" href="{% url 'logout' %}">Logout</a> | <a style= "font-size = 30px" href="{% url 'order_list' %}">My Orders</a> |
 
-        <a href="{% url 'cart' %}">Cart</a> | 
+        <a style= "font-size = 30px" href="{% url 'cart' %}">Cart</a> | 
       {% else %}
-        <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign up</a>
+        <a style= "font-size = 30px" href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign up</a>
       {% endif %}
     </nav>
   </header>
 
-  <aside>
+  <aside style = "text-align: center;width: 280px">
     <h3>Categories</h3>
     <ul>
       {% for cat in categories %}
-        <li><a href="{% url 'category_detail' cat.slug %}">{{ cat.name }}</a></li>
+        <li>
+          <a style = "color: red" href="{% url 'category_detail' cat.slug %}">{{ cat.name }}</a>
+        </li>
       {% endfor %}
     </ul>
   </aside>
 
-  <main>
-    <h2>Products</h2>
+  <main style = "margin-right: 200px;tect-align: center">
+    <h2 style = "text-align: center">Products</h2>
     <ul>
       {% for p in products %}
         <li>
-          <a href="{% url 'product_detail' p.slug %}">{{ p.name }}</a>  ₹{{ p.price }}
+          <a style ="text-decoration: none" href="{% url 'product_detail' p.slug %}">{{ p.name }}</a>  ₹{{ p.price }}
           <form action="{% url 'add_to_cart' p.id %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button style="background-color:blue" type="submit">Add to cart</button>
