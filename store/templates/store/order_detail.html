@@ -1,8 +1,27 @@
-<div style="text-align: center" class="container">
-        <h2 style="background-color: #28a745;color: white;padding: 15px 20px;display: flex;justify-content: space-between;align-items: center;"
-            class="mb-4">Orders</h2>
-            
-<h2>Your Order</h2>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Detail</title>
+    <link rel="stylesheet" href="{% static 'css/order_detail.css' %}">
+</head>
+<body>
+  <header style="background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    border-radius:10px;
+    height: 50px;
+    font-family:"Segoe UI", Arial, sans-serif">
+<h2>Orders</h2>
+<a style="text-decoration: none;color:white" href = "{% url 'home' %}">Back to home</a>
+   </header>
+
+   <div style = "text-align: center">
+    <h2>Your Order</h2>
 
 
 <p><strong>Date:</strong> {{ order.created_at }}</p>
@@ -12,7 +31,7 @@
 <hr>
 
 <h2>Ordered Items</h2>
-<div style="margin-left: 550px;">
+<div style="margin-left: 620px;">
 <table border="1" cellspacing="0" cellpadding="8">
     <thead >
         <tr style="text-align: center;">
@@ -42,4 +61,6 @@
 <p><strong>City:</strong> {{ order.city }}</p>
 <p><strong>Pincode:</strong> {{ order.pincode }}</p>
 
-
+   </div>
+</body>
+</html>
