@@ -5,29 +5,70 @@
     {% load static %}
   </head>
   <style>
-    #h2b{
-      background-color: #28a745;
-  color: white;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-    }
+    
   </style>
   <body>
-  <h2 id="h2b">Sign Up</h2>
+  <header style="background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    border-radius:10px;
+    height: 50px">
+    <h2>Sign Up</h2>
+    <a style="text-decoration: none;color:white" href = "{% url 'home' %}">Back to home</a>
+  </header>
+<form style="border: 1px solid ;width: 600px;height: 500px;margin-top: 50px;margin-left: 400px;text-align: center;background-color: rgb(231, 255, 20);border-radius: 5px;border:none" method="post">
+{% csrf_token %}
 
-  <form style="border: 2px solid ;width: 600px;height: 450px;margin-top: 50px;margin-left: 400px;text-align: center;background-color: rgb(231, 255, 20);border-radius: 4px;" method="post">{% csrf_token %}
-    <div style="width: 598px;height: 60px;border: 1px solid;color: white;background-color: rgb(220, 20, 177);">
-      <h2>Login</h2>
-    </div>
- <p style="padding-top: 20px;"><label>Username: <input name="username"></label></p>
-  <p style="padding-top: 20px;"><label>Email Id: <input name="E-mail"></label></p>
-    <p style="padding-top: 20px;"><label>Password: <input name="password" type="password"></label></p>
-    <p style="padding-top: 20px;"><label>Password Confirmation: <input name="password Confirmation" type="password Confirmation"></label></p>
-    <button style="margin-top: 20px;background-color: chocolate;color: white;height: 30px;border: none;border-radius: 4px;" type="submit">Create account</button>
-    <p style="padding-top: 20px;color: blue;">Already have an account? <a style="background-color: #28a745;color: white;border: none;padding: 8px 12px;border-radius: 4px;cursor: pointer;text-decoration: none;" href="{% url 'login' %}">Login</a></p>
-  </form>
+<div style="width: 598px;height: 60px;border: 1px solid;color: white;background-color: rgb(220, 20, 177);border-radius:5px">
+  <h2>Sign Up</h2>
+</div>
+
+<!-- Show Errors -->
+<div style="color:red;">
+ {% for field in form %}
+    {% for error in field.errors %}
+        <p style="color:red;">{{ error }}</p>
+    {% endfor %}
+{% endfor %}
+
+{% for error in form.non_field_errors %}
+    <p style="color:red;">{{ error }}</p>
+{% endfor %}
+</div>
+
+<p style="padding-top: 20px;">
+  Username: {{ form.username }}
+</p>
+
+<p style="padding-top: 20px;">
+  Email Id: {{ form.email }}
+</p>
+
+<p style="padding-top: 20px;">
+  Password: {{ form.password1 }}
+</p>
+
+<p style="padding-top: 20px;">
+  Password Confirmation: {{ form.password2 }}
+</p>
+
+<button style="margin-top: 20px;background-color: chocolate;color: white;height: 30px;border: none;border-radius: 4px;" type="submit">
+  Create account
+</button>
+
+<p style="padding-top: 20px;color: blue;">
+  Already have an account?
+  <a style="background-color: #28a745;color: white;border: none;padding: 8px 12px;border-radius: 4px;cursor: pointer;text-decoration: none;"
+     href="{% url 'login' %}">
+     Login
+  </a>
+</p>
+
+</form>
   
 </body>
 </html>
