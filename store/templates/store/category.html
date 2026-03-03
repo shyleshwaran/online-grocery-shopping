@@ -1,26 +1,30 @@
+{% load static %}
 <!doctype html>
 <html>
   <head>
     <title>Category: {{ category.name }}</title>
-    {% load static %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+
   </head>
 <style>
-  #header1 {
 
-    background-color: #28a745;
+ 
+
+</style>
+
+<body>
+  <header style="background-color: #28a745;
     color: white;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 24px;
+    font-size: 30px;">
+    <a style="color: white;margin: 0 10px;text-decoration: none;font-weight: bold;" href="{% url 'home' %}">Home</a>
+    <a style="text-decoration: none;color:white" href = "{% url 'home' %}">Back to home</a>
+  </header>
 
-  }
-
-  #div1 {
-    display: flex;
+  <div style = "display: flex;
     flex-wrap: wrap;
     padding: 14px 18px;
     align-items: center;
@@ -30,27 +34,16 @@
     margin-bottom: 14px;
     transition: all 0.25s ease;
     background-color: #fafafa;
-  }
-
-  #div1:hover {
-    background-color: #f1f8e9;
-    transform: translateY(-2px);
-  }
-</style>
-
-<body>
-  <header id="header1">
-    <a style="color: white;margin: 0 10px;text-decoration: none;font-weight: bold;" href="{% url 'home' %}">Home</a>
-  </header>
-
-  <h1>Category: {{ category.name }}</h1>
+     background-color: #f1f8e9;
+    transform: translateY(-2px);">
+  <h1 style="margin-bottom: 800px;margin-left: 50px">Category: {{ category.name }}</h1>
   
-  <main>
+  <main style = "width: 900px;text-align:center">
     <h2>Products</h2>
     <ul>
       {% for p in products %}
-        <li>
-          <a href="{% url 'product_detail' p.slug %}">{{ p.name }}</a>  ₹{{ p.price }}
+        <li style="border:1px solid black;width:880px;height:50px;border-radius: 8px;margin-bottom: 10px;display: flex;align-items: center;justify-content: space-between;padding: 10px;flex-wrap: wrap">
+          <a style ="text-decoration: none" href="{% url 'product_detail' p.slug %}">{{ p.name }}</a>  ₹{{ p.price }}
           <form action="{% url 'add_to_cart' p.id %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button style="background-color: blue;" type="submit">Add to cart</button>
@@ -61,6 +54,7 @@
       {% endfor %}
     </ul>
   </main>
+  </div>
 </body>
 
 </html>
