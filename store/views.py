@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, CheckoutForm
 
 
+
 # Create your views here.
 
 User = get_user_model()
@@ -146,20 +147,14 @@ def checkout(request):
     return render(request, 'store/checkout.html', {'form': form, 'cart': cart, 'total': cart.total_price()})
 
 
+
 @login_required
 def order_list(request):
-    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    orders = Order.objects.filter(user=request.user)
 
     for order in orders:
-        # Attach items
-        order.items_list = order.orderitem_set.all()
-
-        # Calculate total if missing
-        total = 0
-        for item in order.items_list:
-            total += item.price * item.quantity
-
-        order.total = total
+        order.items_list = order.order_items.all()
+        
 
     return render(request, 'store/order_list.html', {'orders': orders})
 
@@ -178,3 +173,11 @@ def order_detail(request):
     })
 
 
+
+@login_required
+def delete_order(request):
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
+        Order.objects.filter(id=order_id, user=request.user).delete()
+
+    return redirect('order_list')
